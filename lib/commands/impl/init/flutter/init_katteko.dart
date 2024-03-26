@@ -9,12 +9,12 @@ import '../../../../functions/create/create_main.dart';
 import '../../../../samples/impl/arctekko/arc_main.dart';
 import '../../../../samples/impl/arctekko/config_example.dart';
 import '../../commads_export.dart';
-import '../../install/install_get.dart';
+import '../../install/install_refreshed.dart';
 
 Future<void> createInitKatekko() async {
   var canContinue = await createMain();
   if (!canContinue) return;
-  await installGet();
+  await installRefreshed();
   var initialDirs = [
     Directory(Structure.replaceAsExpected(path: 'lib/domain/core/interfaces/')),
     Directory(Structure.replaceAsExpected(

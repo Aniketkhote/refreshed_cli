@@ -21,12 +21,13 @@ class ShellUtils {
     String iosLang,
     String androidLang,
   ) async {
-    LogService.info('Running `flutter create $path` …');
+    LogService.info('Running `flutter create $path`');
 
     await run(
-        'flutter create --no-pub -i $iosLang -a $androidLang --org $org'
-        ' "$path"',
-        verbose: true);
+      'flutter create --no-pub -i $iosLang -a $androidLang --org $org'
+      ' "$path"',
+      verbose: true,
+    );
   }
 
   static Future<void> update(

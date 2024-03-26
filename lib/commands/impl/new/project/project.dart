@@ -20,10 +20,10 @@ class CreateProjectCommand extends Command {
   Future<void> execute() async {
     String? nameProject = "";
 
-    if (args.isEmpty || !isValidName(args.first)) {
-      nameProject = askForValidName();
+    if (args.isEmpty || !isValidName(args.first.toLowerCase())) {
+      nameProject = askForValidName()?.toLowerCase();
     } else {
-      nameProject = args.first;
+      nameProject = args.first.toLowerCase();
     }
 
     var path = Structure.replaceAsExpected(
@@ -35,6 +35,7 @@ class CreateProjectCommand extends Command {
     var org = ask(
       '${LocaleKeys.ask_company_domain.tr} \x1B[33m '
       '${LocaleKeys.example.tr} com.yourcompany \x1B[0m',
+      toLower: true,
     );
 
     final iosLangMenu =

@@ -58,13 +58,13 @@ get generate model on home with assets/models/user.json --skipProvider
 get generate model on home from "https://api.github.com/users/CpdnCristiano"
 
 // To install a package in your project (dependencies):
-get install camera
+get install quickly
 
 // To install several packages from your project:
-get install http path camera
+get install quickly path camera
 
 // To install a package with specific version:
-get install path:1.6.4
+get install quickly:5.4.3
 
 // You can also specify several packages with version numbers
 

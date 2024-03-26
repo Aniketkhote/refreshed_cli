@@ -8,13 +8,13 @@ import '../../../../functions/create/create_list_directory.dart';
 import '../../../../functions/create/create_main.dart';
 import '../../../../samples/impl/getx_pattern/get_main.dart';
 import '../../commads_export.dart';
-import '../../install/install_get.dart';
+import '../../install/install_refreshed.dart';
 
 Future<void> createInitGetxPattern() async {
   var canContinue = await createMain();
   if (!canContinue) return;
 
-  await installGet();
+  await installRefreshed();
 
   var initialDirs = [
     Directory(Structure.replaceAsExpected(path: 'lib/app/data/')),
