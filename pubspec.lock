@@ -149,10 +149,10 @@ packages:
     dependency: "direct main"
     description:
       name: dcli
-      sha256: e809d460108bbbffe5a8b6e2e7ce0676f302b503013544d9ef9d80f32bb51182
+      sha256: "5a1a8451f7622fdda2761da5503838a8492dfcb890456c69178ac7c1dc1c0425"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.1-alpha.11"
+    version: "4.0.1-alpha.13"
   dcli_common:
     dependency: transitive
     description:
@@ -445,10 +445,10 @@ packages:
     dependency: transitive
     description:
       name: pubspec_manager
-      sha256: "44df429f8991a13b72f2f84d1bbc6c96e12e965b66d43d5711a6070deee9875f"
+      sha256: b2674161f3f69ed07bc164dc4172afc190d56f060a293a8eb6fa691e5ddf9b5c
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0-beta.1"
+    version: "1.0.0"
   quiver:
     dependency: transitive
     description:

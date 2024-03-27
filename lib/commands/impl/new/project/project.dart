@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dcli/dcli.dart';
 import 'package:path/path.dart' as p;
+import 'package:refreshed_cli/functions/version/print_get_cli.dart';
 
 import '../../../../common/menu/menu.dart';
 import '../../../../common/utils/pubspec/pubspec_utils.dart';
@@ -19,6 +20,8 @@ class CreateProjectCommand extends Command {
   @override
   Future<void> execute() async {
     String? nameProject = "";
+
+    printRefreshedCli();
 
     if (args.isEmpty || !isValidName(args.first.toLowerCase())) {
       nameProject = askForValidName()?.toLowerCase();

@@ -14,7 +14,7 @@ class VersionCommand extends Command {
   Future<void> execute() async {
     var version = await PubspecLock.getVersionCli();
     if (version == null) return;
-    printGetCli();
+    printRefreshedCli();
     print('Version: $version');
   }
 

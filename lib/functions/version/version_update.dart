@@ -29,7 +29,7 @@ void checkForUpdate() async {
                     LocaleKeys.info_update_available.trArgs([versionInstalled]))
                 .toString());
             //await versionCommand();
-            printGetCli();
+            printRefreshedCli();
             final String codeSample = LogService.code('get update');
             LogService.info(
                 '${LocaleKeys.info_update_available2.trArgs([

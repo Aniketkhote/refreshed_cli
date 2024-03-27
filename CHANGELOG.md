@@ -1,11 +1,19 @@
-## 1.0.0-pre.2
+# 1.0.0-pre.4
 
-- Fixed logs.
+- Upgraded dcli to `4.0.1-alpha.13`
 
-## 1.0.0-pre.1
+# 1.0.0-pre.3
 
-- Fixed typos.
+- Changed project name and package name to lowercase for consistency.
 
-## 1.0.0-pre
+# 1.0.0-pre.2
 
-- Initial version.
+- Fixed issues with logging functionality.
+
+# 1.0.0-pre.1
+
+- Corrected typos in the codebase.
+
+# 1.0.0-pre
+
+- Initial release of the project.
