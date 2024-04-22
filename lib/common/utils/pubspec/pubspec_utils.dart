@@ -48,8 +48,7 @@ class PubspecUtils {
           }
         }
       } on Exception catch (_) {}
-      // retorno nulo está sendo tratado
-      // ignore: avoid_returning_null
+
       return null;
     },
   );

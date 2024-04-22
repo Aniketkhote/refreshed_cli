@@ -1,3 +1,7 @@
+# 1.0.0
+
+- Bump versions
+
 # 1.0.0-pre.4
 
 - Upgraded dcli to `4.0.1-alpha.13`

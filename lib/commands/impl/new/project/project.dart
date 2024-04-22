@@ -21,6 +21,8 @@ class CreateProjectCommand extends Command {
   Future<void> execute() async {
     String? nameProject = "";
 
+    print('');
+    print('');
     printRefreshedCli();
 
     if (args.isEmpty || !isValidName(args.first.toLowerCase())) {
