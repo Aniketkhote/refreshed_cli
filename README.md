@@ -64,7 +64,7 @@ get install quickly
 get install quickly path camera
 
 // To install a package with specific version:
-get install quickly:5.4.3
+get install quickly:5.6.0
 
 // You can also specify several packages with version numbers
 

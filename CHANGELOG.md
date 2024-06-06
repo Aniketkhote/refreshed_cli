@@ -1,3 +1,8 @@
+# 1.1.0
+
+- Use dots to separating keys level when flattening JSON to a single level generate locales by @knottx
+- Bump versions
+
 # 1.0.0
 
 - Bump versions
