@@ -50,7 +50,7 @@ class InstallCommand extends Command {
     return true;
   }
 
-  final String? codeSample1 = LogService.code('get install refreshed:2.7.0');
+  final String? codeSample1 = LogService.code('get install refreshed:2.9.0');
   final String? codeSample2 = LogService.code('get install refreshed');
 
   @override

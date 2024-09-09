@@ -6,6 +6,7 @@ import '../../interface/command.dart';
 
 // ignore_for_file: avoid_print
 
+/// Command to display the current version of the CLI tool.
 class VersionCommand extends Command {
   @override
   String get commandName => 'version';

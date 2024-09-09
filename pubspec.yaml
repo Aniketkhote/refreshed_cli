@@ -1,5 +1,5 @@
 name: refreshed_cli
-version: 1.1.0
+version: 1.1.1
 homepage: https://github.com/Aniketkhote/refreshed_cli
 description: Official CLI for Refreshed framework to build Flutter Applications easily
 
@@ -8,14 +8,14 @@ environment:
 
 dependencies:
   ansicolor: "^2.0.2"
-  collection: "^1.18.0"
+  collection: "^1.19.0"
   dart_style: "^2.3.6"
-  dcli: "^4.0.1"
-  http: "^1.2.1"
+  dcli: "^6.0.5"
+  http: "^1.2.2"
   intl: ">=0.19.0 <=1.0.0"
   meta: "^1.15.0"
   path: ">=1.8.3 <=2.0.0"
-  process_run: "^0.14.2"
+  process_run: "^1.1.0"
   pubspec: "^2.3.0"
   recase: "^4.1.0"
   version: "^3.0.2"
@@ -23,7 +23,7 @@ dependencies:
 
 dev_dependencies:
   lints: ^4.0.0
-  test: ^1.25.7
+  test: ^1.25.8
 
 executables:
   get: refreshed

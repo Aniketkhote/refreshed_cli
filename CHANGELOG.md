@@ -1,3 +1,7 @@
+# 1.1.1
+
+- Up to date with `Refreshed` package.
+
 # 1.1.0
 
 - Use dots to separating keys level when flattening JSON to a single level generate locales by @knottx
