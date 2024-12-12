@@ -1,3 +1,7 @@
+# 1.1.2
+
+- Compatible with flutter `3.27.0`.
+
 # 1.1.1
 
 - Up to date with `Refreshed` package.

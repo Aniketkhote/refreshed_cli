@@ -179,7 +179,8 @@ class ModelGenerator {
   /// an error.
   DartCode generateDartClasses(String rawJson) {
     final unsafeDartCode = generateUnsafeDart(rawJson);
-    final formatter = DartFormatter();
+    final formatter =
+        DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
     return DartCode(
         formatter.format(unsafeDartCode.code), unsafeDartCode.warnings);
   }

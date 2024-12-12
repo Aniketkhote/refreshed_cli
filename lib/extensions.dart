@@ -1,4 +1,4 @@
-library refreshed_cli.extensions;
+library;
 
 export 'package:refreshed_cli/core/internationalization.dart';
 export 'package:refreshed_cli/extensions/dart_code.dart';
