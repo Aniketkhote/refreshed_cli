@@ -4,7 +4,7 @@ import 'package:pub_semver/pub_semver.dart';
 import 'package:pubspec_parse/pubspec_parse.dart';
 import 'package:refreshed_cli/common/menu/menu.dart';
 import 'package:refreshed_cli/common/utils/logger/log_utils.dart';
-import 'package:refreshed_cli/common/utils/shell/shel.utils.dart';
+import 'package:refreshed_cli/common/utils/shell/shell.utils.dart';
 import 'package:refreshed_cli/core/internationalization.dart';
 import 'package:refreshed_cli/core/locales.g.dart';
 import 'package:refreshed_cli/extensions.dart';
@@ -144,7 +144,8 @@ class PubspecUtils {
   static bool get nullSafeSupport => !pubSpec.environment!['sdkConstraint']!
       .allowsAny(VersionConstraint.parse('<2.12.0'));
 
-  static String get getPackageImport => "package:refreshed/refreshed.dart";
+  static String get getPackageImport =>
+      "import 'package:refreshed/refreshed.dart';";
 
   // static v.Version? getPackageVersion(String package) {
   //   if (containsPackage(package)) {

@@ -83,16 +83,6 @@ class Node {
   final Location? loc;
 
   Node(this.type, this.loc);
-
-  // Node copyWith({
-  //   String? type,
-  //   Location? loc,
-  // }) {
-  //   return Node(
-  //     type ?? this.type,
-  //     loc ?? this.loc,
-  //   );
-  // }
 }
 
 class ValueNode extends Node {

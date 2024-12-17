@@ -1,5 +1,5 @@
 import 'package:refreshed_cli/commands/interface/command.dart';
-import 'package:refreshed_cli/common/utils/shell/shel.utils.dart';
+import 'package:refreshed_cli/common/utils/shell/shell.utils.dart';
 import 'package:refreshed_cli/core/internationalization.dart';
 import 'package:refreshed_cli/core/locales.g.dart';
 

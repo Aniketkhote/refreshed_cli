@@ -6,7 +6,7 @@ import 'package:refreshed_cli/commands/impl/init/flutter/init.dart';
 import 'package:refreshed_cli/commands/interface/command.dart';
 import 'package:refreshed_cli/common/menu/menu.dart';
 import 'package:refreshed_cli/common/utils/pubspec/pubspec_utils.dart';
-import 'package:refreshed_cli/common/utils/shell/shel.utils.dart';
+import 'package:refreshed_cli/common/utils/shell/shell.utils.dart';
 import 'package:refreshed_cli/core/internationalization.dart';
 import 'package:refreshed_cli/core/locales.g.dart';
 import 'package:refreshed_cli/core/structure.dart';

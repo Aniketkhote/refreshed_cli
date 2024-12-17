@@ -13,22 +13,41 @@ class PubDevApi {
         ? 'https://pub.flutter-io.cn/api/packages/$package'
         : 'https://pub.dev/api/packages/$package';
     var uri = Uri.parse(pubSite);
+
     try {
-      var value = await get(uri);
-      if (value.statusCode == 200) {
-        final version = json.decode(value.body)['latest']['version'] as String?;
-        return version;
-      } else if (value.statusCode == 404) {
-        LogService.info(
-          LocaleKeys.error_package_not_found.trArgs([package]),
-          false,
-          false,
-        );
+      var response = await get(uri);
+
+      // Handle different HTTP status codes
+      if (response.statusCode == 200) {
+        final version =
+            json.decode(response.body)['latest']['version'] as String?;
+        if (version != null) {
+          return version;
+        } else {
+          _logError(LocaleKeys.error_package_not_found.trArgs([package]));
+        }
+      } else if (response.statusCode == 404) {
+        _logPackageNotFound(package);
+      } else {
+        _logError('Unexpected status code: ${response.statusCode}');
       }
-      return null;
     } on Exception catch (err) {
-      LogService.error(err.toString());
-      return null;
+      _logError('Exception occurred: $err');
     }
+    return null;
+  }
+
+  // Helper method for logging package not found
+  static void _logPackageNotFound(String package) {
+    LogService.info(
+      LocaleKeys.error_package_not_found.trArgs([package]),
+      false,
+      false,
+    );
+  }
+
+  // Helper method for logging errors
+  static void _logError(String message) {
+    LogService.error(message);
   }
 }

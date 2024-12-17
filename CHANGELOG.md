@@ -1,3 +1,8 @@
+# 1.3.0
+
+- Refactor the `GetMaterialApp` by moving it from the `main()` function to a separate class.
+- Updated route naming conventions to align with best practices.
+
 # 1.2.0
 
 - Refactor code.

@@ -1,7 +1,7 @@
 import 'package:refreshed_cli/commands/interface/command.dart';
 import 'package:refreshed_cli/common/utils/logger/log_utils.dart';
 import 'package:refreshed_cli/common/utils/pubspec/pubspec_utils.dart';
-import 'package:refreshed_cli/common/utils/shell/shel.utils.dart';
+import 'package:refreshed_cli/common/utils/shell/shell.utils.dart';
 import 'package:refreshed_cli/core/internationalization.dart';
 import 'package:refreshed_cli/core/locales.g.dart';
 import 'package:refreshed_cli/exception_handler/exceptions/cli_exception.dart';

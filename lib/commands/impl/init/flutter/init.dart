@@ -3,7 +3,7 @@ import 'package:refreshed_cli/commands/impl/init/flutter/init_katteko.dart';
 import 'package:refreshed_cli/commands/interface/command.dart';
 import 'package:refreshed_cli/common/menu/menu.dart';
 import 'package:refreshed_cli/common/utils/logger/log_utils.dart';
-import 'package:refreshed_cli/common/utils/shell/shel.utils.dart';
+import 'package:refreshed_cli/common/utils/shell/shell.utils.dart';
 import 'package:refreshed_cli/core/internationalization.dart';
 import 'package:refreshed_cli/core/locales.g.dart';
 
