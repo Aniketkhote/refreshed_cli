@@ -1,15 +1,14 @@
 import 'dart:io';
 
+import 'package:refreshed_cli/cli_config/cli_config.dart';
+import 'package:refreshed_cli/common/utils/logger/log_utils.dart';
+import 'package:refreshed_cli/common/utils/pub_dev/pub_dev_api.dart';
+import 'package:refreshed_cli/common/utils/pubspec/pubspec_lock.dart';
+import 'package:refreshed_cli/core/internationalization.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
+import 'package:refreshed_cli/functions/version/check_dev_version.dart';
+import 'package:refreshed_cli/functions/version/print_get_cli.dart';
 import 'package:version/version.dart';
-
-import '../../cli_config/cli_config.dart';
-import '../../common/utils/logger/log_utils.dart';
-import '../../common/utils/pub_dev/pub_dev_api.dart';
-import '../../common/utils/pubspec/pubspec_lock.dart';
-import '../../core/internationalization.dart';
-import '../../core/locales.g.dart';
-import 'check_dev_version.dart';
-import 'print_get_cli.dart';
 
 void checkForUpdate() async {
   if (!CliConfig.updateIsCheckingToday()) {

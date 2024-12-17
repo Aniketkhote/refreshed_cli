@@ -1,40 +1,39 @@
 import 'package:meta/meta.dart';
-
-import './error.dart';
-import './location.dart';
-import './tokenize_error_types.dart';
-import './utils/substring.dart';
+import 'package:refreshed_cli/common/utils/json_serialize/json_ast/error.dart';
+import 'package:refreshed_cli/common/utils/json_serialize/json_ast/location.dart';
+import 'package:refreshed_cli/common/utils/json_serialize/json_ast/tokenize_error_types.dart';
+import 'package:refreshed_cli/common/utils/json_serialize/json_ast/utils/substring.dart';
 
 enum TokenType {
-  LEFT_BRACE, // {
-  RIGHT_BRACE, // }
-  LEFT_BRACKET, // [
-  RIGHT_BRACKET, // ]
-  COLON, // :
-  COMMA, // ,
-  STRING, //
-  NUMBER, //
-  TRUE, // true
-  FALSE, // false
-  NULL // null
+  leftBrace, // {
+  rightBrace, // }
+  leftBracket, // [
+  rightBracket, // ]
+  colon, // :
+  comma, // ,
+  string, // string
+  number, // number
+  true_, // true (reserved keyword, renamed to true_)
+  false_, // false (reserved keyword, renamed to false_)
+  null_ // null (reserved keyword, renamed to null_)
 }
 
 final Map<String, TokenType> punctuatorTokensMap = {
-  '{': TokenType.LEFT_BRACE,
-  '}': TokenType.RIGHT_BRACE,
-  '[': TokenType.LEFT_BRACKET,
-  ']': TokenType.RIGHT_BRACKET,
-  ':': TokenType.COLON,
-  ',': TokenType.COMMA
+  '{': TokenType.leftBrace,
+  '}': TokenType.rightBrace,
+  '[': TokenType.leftBracket,
+  ']': TokenType.rightBracket,
+  ':': TokenType.colon,
+  ',': TokenType.comma
 };
 
 final Map<String, TokenType> keywordTokensMap = {
-  'true': TokenType.TRUE,
-  'false': TokenType.FALSE,
-  'null': TokenType.NULL
+  'true': TokenType.true_,
+  'false': TokenType.false_,
+  'null': TokenType.null_
 };
 
-enum _StringState { _START_, START_QUOTE_OR_CHAR, ESCAPE }
+enum _StringState { start, startQuoteOrChar, escape }
 
 final Map<String, int> escapes = {
   '"': 0, // Quotation mask
@@ -49,14 +48,14 @@ final Map<String, int> escapes = {
 };
 
 enum _NumberState {
-  _START_,
-  MINUS,
-  ZERO,
-  DIGIT,
-  POINT,
-  DIGIT_FRACTION,
-  EXP,
-  EXP_DIGIT_OR_SIGN
+  start,
+  minus,
+  zero,
+  digit,
+  point,
+  digitFraction,
+  exp,
+  expDigitOrSign,
 }
 
 bool _compareDynamicList(List? l, List? other) {
@@ -375,32 +374,32 @@ Token? parseKeyword(String input, int index, int line, int column) {
 Token? parseString(String input, int index, int line, int column) {
   final startIndex = index;
   // final buffer = StringBuffer();
-  var state = _StringState._START_;
+  var state = _StringState.start;
 
   while (index < input.length) {
     final char = input[index];
 
     switch (state) {
-      case _StringState._START_:
+      case _StringState.start:
         {
           if (char == '"') {
             index++;
-            state = _StringState.START_QUOTE_OR_CHAR;
+            state = _StringState.startQuoteOrChar;
           } else {
             return null;
           }
           break;
         }
 
-      case _StringState.START_QUOTE_OR_CHAR:
+      case _StringState.startQuoteOrChar:
         {
           if (char == '\\') {
             // buffer.write(char);
             index++;
-            state = _StringState.ESCAPE;
+            state = _StringState.escape;
           } else if (char == '"') {
             index++;
-            return Token(TokenType.STRING, line, column + index - startIndex,
+            return Token(TokenType.string, line, column + index - startIndex,
                 index, safeSubstring(input, startIndex, index));
           } else {
             // buffer.write(char);
@@ -409,7 +408,7 @@ Token? parseString(String input, int index, int line, int column) {
           break;
         }
 
-      case _StringState.ESCAPE:
+      case _StringState.escape:
         {
           if (escapes.containsKey(char)) {
             // buffer.write(char);
@@ -425,7 +424,7 @@ Token? parseString(String input, int index, int line, int column) {
                 }
               }
             }
-            state = _StringState.START_QUOTE_OR_CHAR;
+            state = _StringState.startQuoteOrChar;
           } else {
             return null;
           }
@@ -439,106 +438,106 @@ Token? parseString(String input, int index, int line, int column) {
 Token? parseNumber(String input, int index, int line, int column) {
   final startIndex = index;
   var passedValueIndex = index;
-  var state = _NumberState._START_;
+  var state = _NumberState.start;
 
   iterator:
   while (index < input.length) {
     final char = input[index];
 
     switch (state) {
-      case _NumberState._START_:
+      case _NumberState.start:
         {
           if (char == '-') {
-            state = _NumberState.MINUS;
+            state = _NumberState.minus;
           } else if (char == '0') {
             passedValueIndex = index + 1;
-            state = _NumberState.ZERO;
+            state = _NumberState.zero;
           } else if (isDigit1to9(char)) {
             passedValueIndex = index + 1;
-            state = _NumberState.DIGIT;
+            state = _NumberState.digit;
           } else {
             return null;
           }
           break;
         }
 
-      case _NumberState.MINUS:
+      case _NumberState.minus:
         {
           if (char == '0') {
             passedValueIndex = index + 1;
-            state = _NumberState.ZERO;
+            state = _NumberState.zero;
           } else if (isDigit1to9(char)) {
             passedValueIndex = index + 1;
-            state = _NumberState.DIGIT;
+            state = _NumberState.digit;
           } else {
             return null;
           }
           break;
         }
 
-      case _NumberState.ZERO:
+      case _NumberState.zero:
         {
           if (char == '.') {
-            state = _NumberState.POINT;
+            state = _NumberState.point;
           } else if (isExp(char)) {
-            state = _NumberState.EXP;
+            state = _NumberState.exp;
           } else {
             break iterator;
           }
           break;
         }
 
-      case _NumberState.DIGIT:
+      case _NumberState.digit:
         {
           if (isDigit(char)) {
             passedValueIndex = index + 1;
           } else if (char == '.') {
-            state = _NumberState.POINT;
+            state = _NumberState.point;
           } else if (isExp(char)) {
-            state = _NumberState.EXP;
+            state = _NumberState.exp;
           } else {
             break iterator;
           }
           break;
         }
 
-      case _NumberState.POINT:
+      case _NumberState.point:
         {
           if (isDigit(char)) {
             passedValueIndex = index + 1;
-            state = _NumberState.DIGIT_FRACTION;
+            state = _NumberState.digitFraction;
           } else {
             break iterator;
           }
           break;
         }
 
-      case _NumberState.DIGIT_FRACTION:
+      case _NumberState.digitFraction:
         {
           if (isDigit(char)) {
             passedValueIndex = index + 1;
           } else if (isExp(char)) {
-            state = _NumberState.EXP;
+            state = _NumberState.exp;
           } else {
             break iterator;
           }
           break;
         }
 
-      case _NumberState.EXP:
+      case _NumberState.exp:
         {
           if (char == '+' || char == '-') {
-            state = _NumberState.EXP_DIGIT_OR_SIGN;
+            state = _NumberState.expDigitOrSign;
           } else if (isDigit(char)) {
             passedValueIndex = index + 1;
-            state = _NumberState.EXP_DIGIT_OR_SIGN;
+            state = _NumberState.expDigitOrSign;
           } else {
             break iterator;
           }
           break;
         }
 
-      case _NumberState.EXP_DIGIT_OR_SIGN:
+      case _NumberState.expDigitOrSign:
         {
           if (isDigit(char)) {
             passedValueIndex = index + 1;
@@ -553,7 +552,7 @@ Token? parseNumber(String input, int index, int line, int column) {
   }
 
   if (passedValueIndex > 0) {
-    return Token(TokenType.NUMBER, line, column + passedValueIndex - startIndex,
+    return Token(TokenType.number, line, column + passedValueIndex - startIndex,
         passedValueIndex, safeSubstring(input, startIndex, passedValueIndex));
   }
 

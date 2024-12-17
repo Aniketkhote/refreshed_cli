@@ -1,8 +1,8 @@
-import '../../../../core/internationalization.dart';
-import '../../../../core/locales.g.dart';
-import '../../../../functions/create/create_single_file.dart';
-import '../../../../samples/impl/get_provider.dart';
-import '../../../interface/command.dart';
+import 'package:refreshed_cli/commands/interface/command.dart';
+import 'package:refreshed_cli/core/internationalization.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
+import 'package:refreshed_cli/functions/create/create_single_file.dart';
+import 'package:refreshed_cli/samples/impl/get_provider.dart';
 
 class CreateProviderCommand extends Command {
   @override

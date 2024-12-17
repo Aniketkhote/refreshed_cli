@@ -1,12 +1,11 @@
 import 'dart:io';
 
 import 'package:recase/recase.dart';
-
-import '../../common/utils/logger/log_utils.dart';
-import '../../common/utils/pubspec/pubspec_utils.dart';
-import '../../core/internationalization.dart';
-import '../../core/locales.g.dart';
-import '../create/create_single_file.dart';
+import 'package:refreshed_cli/common/utils/logger/log_utils.dart';
+import 'package:refreshed_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:refreshed_cli/core/internationalization.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
+import 'package:refreshed_cli/functions/create/create_single_file.dart';
 
 ///
 /// Add a new dependency to bindings

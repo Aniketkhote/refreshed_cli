@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'locales.g.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
 
 extension TranslationExt on String {
   /// Translation

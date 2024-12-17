@@ -1,15 +1,14 @@
 import 'dart:io';
 
 import 'package:recase/recase.dart';
-
-import '../../common/utils/logger/log_utils.dart';
-import '../../common/utils/pubspec/pubspec_utils.dart';
-import '../../core/locales.g.dart';
-import '../../extensions.dart';
-import '../../samples/impl/get_route.dart';
-import '../find_file/find_file_by_name.dart';
-import 'get_app_pages.dart';
-import 'get_support_children.dart';
+import 'package:refreshed_cli/common/utils/logger/log_utils.dart';
+import 'package:refreshed_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
+import 'package:refreshed_cli/extensions.dart';
+import 'package:refreshed_cli/functions/find_file/find_file_by_name.dart';
+import 'package:refreshed_cli/functions/routes/get_app_pages.dart';
+import 'package:refreshed_cli/functions/routes/get_support_children.dart';
+import 'package:refreshed_cli/samples/impl/get_route.dart';
 
 /// This command will create the route to the new page
 void addRoute(String nameRoute, String bindingDir, String viewDir) {

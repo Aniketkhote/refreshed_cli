@@ -1,4 +1,4 @@
-import '../../interface/sample_interface.dart';
+import 'package:refreshed_cli/samples/interface/sample_interface.dart';
 
 class ArcMainSample extends Sample {
   ArcMainSample() : super('lib/main.dart', overwrite: true);

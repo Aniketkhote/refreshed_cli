@@ -1,9 +1,10 @@
-// ignore_for_file: unnecessary_string_escapes
+import 'package:ansicolor/ansicolor.dart';
 
 void printRefreshedCli() {
+  var pen = AnsiPen()..green();
   print('''
- +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+   +-+ +-+ +-+
- |R| |E| |F| |R| |E| |S| |H| |E| |D|   |C| |L| |I|
- +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+   +-+ +-+ +-+                                                                                                     
+${pen('+-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+   +-+ +-+ +-+')}
+${pen('|R| |E| |F| |R| |E| |S| |H| |E| |D|   |C| |L| |I|')}
+${pen('+-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+   +-+ +-+ +-+')}
 ''');
 }

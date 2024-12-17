@@ -1,15 +1,15 @@
 import 'dart:io';
 
-import '../../../../common/utils/logger/log_utils.dart';
-import '../../../../core/internationalization.dart';
-import '../../../../core/locales.g.dart';
-import '../../../../core/structure.dart';
-import '../../../../functions/create/create_list_directory.dart';
-import '../../../../functions/create/create_main.dart';
-import '../../../../samples/impl/arctekko/arc_main.dart';
-import '../../../../samples/impl/arctekko/config_example.dart';
-import '../../commads_export.dart';
-import '../../install/install_refreshed.dart';
+import 'package:refreshed_cli/commands/impl/commads_export.dart';
+import 'package:refreshed_cli/commands/impl/install/install_refreshed.dart';
+import 'package:refreshed_cli/common/utils/logger/log_utils.dart';
+import 'package:refreshed_cli/core/internationalization.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
+import 'package:refreshed_cli/core/structure.dart';
+import 'package:refreshed_cli/functions/create/create_list_directory.dart';
+import 'package:refreshed_cli/functions/create/create_main.dart';
+import 'package:refreshed_cli/samples/impl/arctekko/arc_main.dart';
+import 'package:refreshed_cli/samples/impl/arctekko/config_example.dart';
 
 Future<void> createInitKatekko() async {
   var canContinue = await createMain();

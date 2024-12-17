@@ -1,18 +1,27 @@
 import 'dart:io';
 
 import 'package:process_run/shell_run.dart';
-
-import '../../../core/generator.dart';
-import '../../../core/internationalization.dart';
-import '../../../core/locales.g.dart';
-import '../logger/log_utils.dart';
-import '../pub_dev/pub_dev_api.dart';
-import '../pubspec/pubspec_lock.dart';
+import 'package:refreshed_cli/common/utils/logger/log_utils.dart';
+import 'package:refreshed_cli/common/utils/pub_dev/pub_dev_api.dart';
+import 'package:refreshed_cli/common/utils/pubspec/pubspec_lock.dart';
+import 'package:refreshed_cli/core/generator.dart';
+import 'package:refreshed_cli/core/internationalization.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
 
 class ShellUtils {
   static Future<void> pubGet() async {
     LogService.info('Running `flutter pub get` …');
-    await run('flutter pub get', verbose: true);
+    await run('dart pub get', verbose: true);
+  }
+
+  static Future<void> addPackage(String package) async {
+    LogService.info('Adding package $package …');
+    await run('dart pub add $package', verbose: true);
+  }
+
+  static Future<void> removePackage(String package) async {
+    LogService.info('Removing package $package …');
+    await run('dart pub remove $package', verbose: true);
   }
 
   static Future<void> flutterCreate(

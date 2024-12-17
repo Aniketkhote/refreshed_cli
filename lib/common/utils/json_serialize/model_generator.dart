@@ -2,11 +2,11 @@ import 'dart:collection';
 
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:dart_style/dart_style.dart';
-
-import '../pubspec/pubspec_utils.dart';
-import 'helpers.dart';
-import 'json_ast/json_ast.dart' show parse, Settings, Node;
-import 'sintaxe.dart';
+import 'package:refreshed_cli/common/utils/json_serialize/helpers.dart';
+import 'package:refreshed_cli/common/utils/json_serialize/json_ast/json_ast.dart'
+    show parse, Settings, Node;
+import 'package:refreshed_cli/common/utils/json_serialize/sintaxe.dart';
+import 'package:refreshed_cli/common/utils/pubspec/pubspec_utils.dart';
 
 class DartCode extends WithWarning<String> {
   DartCode(super.result, super.warnings);

@@ -1,7 +1,6 @@
 import 'package:recase/recase.dart';
-
-import '../../common/utils/pubspec/pubspec_utils.dart';
-import '../interface/sample_interface.dart';
+import 'package:refreshed_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:refreshed_cli/samples/interface/sample_interface.dart';
 
 /// [Sample] file from Module_Binding file creation.
 class BindingSample extends Sample {

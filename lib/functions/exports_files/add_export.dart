@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import '../../core/structure.dart';
+import 'package:refreshed_cli/core/structure.dart';
 
 void addExport(String path, String line) {
   var newFile = File(Structure.replaceAsExpected(path: path));

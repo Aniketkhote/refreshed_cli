@@ -1,10 +1,9 @@
 import 'dart:io';
 
+import 'package:refreshed_cli/exception_handler/exceptions/cli_exception.dart';
+import 'package:refreshed_cli/extensions/string.dart';
 import 'package:refreshed_cli/functions/create/create_single_file.dart';
 import 'package:refreshed_cli/functions/formatter_dart_file/frommatter_dart_file.dart';
-
-import '../exception_handler/exceptions/cli_exception.dart';
-import 'string.dart';
 
 extension DartCodeExt on File {
   /// Append the content of dart class

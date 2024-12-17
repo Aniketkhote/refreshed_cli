@@ -3,10 +3,9 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:collection/collection.dart';
-
-import '../logger/log_utils.dart';
-import 'json_ast/json_ast.dart';
-import 'sintaxe.dart';
+import 'package:refreshed_cli/common/utils/json_serialize/json_ast/json_ast.dart';
+import 'package:refreshed_cli/common/utils/json_serialize/sintaxe.dart';
+import 'package:refreshed_cli/common/utils/logger/log_utils.dart';
 
 const Map<String, bool> primitivesTypes = {
   'int': true,

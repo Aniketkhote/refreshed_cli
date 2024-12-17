@@ -1,6 +1,5 @@
 import 'package:recase/recase.dart';
-
-import '../interface/sample_interface.dart';
+import 'package:refreshed_cli/samples/interface/sample_interface.dart';
 
 /// [Sample] file from Module_Controller file creation.
 class ControllerSample extends Sample {

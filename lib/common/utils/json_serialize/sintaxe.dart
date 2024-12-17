@@ -1,12 +1,8 @@
-// ignore_for_file: lines_longer_than_80_chars
-
 import 'package:collection/collection.dart' show IterableExtension;
-
-import '../pubspec/pubspec_utils.dart';
-import 'helpers.dart';
-import 'json_ast/json_ast.dart' show Node;
-
-// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
+import 'package:refreshed_cli/common/utils/json_serialize/helpers.dart';
+import 'package:refreshed_cli/common/utils/json_serialize/json_ast/json_ast.dart'
+    show Node;
+import 'package:refreshed_cli/common/utils/pubspec/pubspec_utils.dart';
 
 const String emptyListWarn = 'list is empty';
 const String ambiguousListWarn = 'list is ambiguous';

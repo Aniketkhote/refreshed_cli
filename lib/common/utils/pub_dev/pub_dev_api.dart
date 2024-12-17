@@ -2,10 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart';
-
-import '../../../core/internationalization.dart';
-import '../../../core/locales.g.dart';
-import '../logger/log_utils.dart';
+import 'package:refreshed_cli/common/utils/logger/log_utils.dart';
+import 'package:refreshed_cli/core/internationalization.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
 
 class PubDevApi {
   static Future<String?> getLatestVersionFromPackage(String package) async {

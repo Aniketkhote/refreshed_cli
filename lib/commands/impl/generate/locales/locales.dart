@@ -2,14 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:path/path.dart';
-
-import '../../../../common/utils/logger/log_utils.dart';
-import '../../../../core/internationalization.dart';
-import '../../../../core/locales.g.dart';
-import '../../../../core/structure.dart';
-import '../../../../exception_handler/exceptions/cli_exception.dart';
-import '../../../../samples/impl/generate_locales.dart';
-import '../../../interface/command.dart';
+import 'package:refreshed_cli/commands/interface/command.dart';
+import 'package:refreshed_cli/common/utils/logger/log_utils.dart';
+import 'package:refreshed_cli/core/internationalization.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
+import 'package:refreshed_cli/core/structure.dart';
+import 'package:refreshed_cli/exception_handler/exceptions/cli_exception.dart';
+import 'package:refreshed_cli/samples/impl/generate_locales.dart';
 
 class GenerateLocalesCommand extends Command {
   @override

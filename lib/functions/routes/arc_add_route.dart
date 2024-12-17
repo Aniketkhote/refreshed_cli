@@ -2,15 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:recase/recase.dart';
-
-import '../../common/utils/logger/log_utils.dart';
-import '../../core/internationalization.dart';
-import '../../core/locales.g.dart';
-import '../../core/structure.dart';
-import '../../samples/impl/arctekko/arc_routes.dart';
-import '../create/create_navigation.dart';
-import '../create/create_single_file.dart';
-import '../formatter_dart_file/frommatter_dart_file.dart';
+import 'package:refreshed_cli/common/utils/logger/log_utils.dart';
+import 'package:refreshed_cli/core/internationalization.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
+import 'package:refreshed_cli/core/structure.dart';
+import 'package:refreshed_cli/functions/create/create_navigation.dart';
+import 'package:refreshed_cli/functions/create/create_single_file.dart';
+import 'package:refreshed_cli/functions/formatter_dart_file/frommatter_dart_file.dart';
+import 'package:refreshed_cli/samples/impl/arctekko/arc_routes.dart';
 
 void arcAddRoute(String nameRoute) {
   var routesFile = File(Structure.replaceAsExpected(

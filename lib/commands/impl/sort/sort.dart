@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import '../../../common/utils/logger/log_utils.dart';
-import '../../../core/internationalization.dart';
-import '../../../core/locales.g.dart';
-import '../../../exception_handler/exceptions/cli_exception.dart';
-import '../../../functions/create/create_single_file.dart';
-import '../../interface/command.dart';
+import 'package:refreshed_cli/commands/interface/command.dart';
+import 'package:refreshed_cli/common/utils/logger/log_utils.dart';
+import 'package:refreshed_cli/core/internationalization.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
+import 'package:refreshed_cli/exception_handler/exceptions/cli_exception.dart';
+import 'package:refreshed_cli/functions/create/create_single_file.dart';
 
 class SortCommand extends Command {
   @override

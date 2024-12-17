@@ -1,5 +1,5 @@
-import '../../common/utils/pubspec/pubspec_utils.dart';
-import '../interface/sample_interface.dart';
+import 'package:refreshed_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:refreshed_cli/samples/interface/sample_interface.dart';
 
 /// [Sample] file from Module_View file creation.
 class GetViewSample extends Sample {

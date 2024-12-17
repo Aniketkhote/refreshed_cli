@@ -1,16 +1,30 @@
 import 'dart:math';
 
-import './error.dart';
-import './location.dart';
-import './parse_error_types.dart';
-import './tokenize.dart';
-import './utils/substring.dart';
+import 'package:refreshed_cli/common/utils/json_serialize/json_ast/error.dart';
+import 'package:refreshed_cli/common/utils/json_serialize/json_ast/location.dart';
+import 'package:refreshed_cli/common/utils/json_serialize/json_ast/parse_error_types.dart';
+import 'package:refreshed_cli/common/utils/json_serialize/json_ast/tokenize.dart';
+import 'package:refreshed_cli/common/utils/json_serialize/json_ast/utils/substring.dart';
 
-enum _ObjectState { _START_, OPEN_OBJECT, PROPERTY, COMMA }
+enum _ObjectState {
+  start,
+  openObject,
+  property,
+  comma,
+}
 
-enum _PropertyState { _START_, KEY, COLON }
+enum _PropertyState {
+  start,
+  key,
+  colon,
+}
 
-enum _ArrayState { _START_, OPEN_ARRAY, VALUE, COMMA }
+enum _ArrayState {
+  start,
+  openArray,
+  value,
+  comma,
+}
 
 JSONASTException errorEof(
     String input, List<dynamic> tokenList, Settings settings) {
@@ -68,20 +82,20 @@ String parseString(String string) {
 
 ValueIndex<ObjectNode>? parseObject(
     String input, List<Token> tokenList, int index, Settings settings) {
-  // object: LEFT_BRACE (property (COMMA property)*)? RIGHT_BRACE
+  // object: leftBrace (property (comma property)*)? rightBrace
   late Token startToken;
   var object = ObjectNode();
-  var state = _ObjectState._START_;
+  var state = _ObjectState.start;
 
   while (index < tokenList.length) {
     final token = tokenList[index];
 
     switch (state) {
-      case _ObjectState._START_:
+      case _ObjectState.start:
         {
-          if (token.type == TokenType.LEFT_BRACE) {
+          if (token.type == TokenType.leftBrace) {
             startToken = token;
-            state = _ObjectState.OPEN_OBJECT;
+            state = _ObjectState.openObject;
             index++;
           } else {
             return null;
@@ -89,9 +103,9 @@ ValueIndex<ObjectNode>? parseObject(
           break;
         }
 
-      case _ObjectState.OPEN_OBJECT:
+      case _ObjectState.openObject:
         {
-          if (token.type == TokenType.RIGHT_BRACE) {
+          if (token.type == TokenType.rightBrace) {
             //  if (settings.loc != null) {
             object = object.copyWith(
                 loc: Location.create(
@@ -107,15 +121,15 @@ ValueIndex<ObjectNode>? parseObject(
           } else {
             final property = parseProperty(input, tokenList, index, settings)!;
             object.children.add(property.value);
-            state = _ObjectState.PROPERTY;
+            state = _ObjectState.property;
             index = property.index;
           }
           break;
         }
 
-      case _ObjectState.PROPERTY:
+      case _ObjectState.property:
         {
-          if (token.type == TokenType.RIGHT_BRACE) {
+          if (token.type == TokenType.rightBrace) {
             if (settings.loc) {
               object = object.copyWith(
                 loc: Location.create(
@@ -130,8 +144,8 @@ ValueIndex<ObjectNode>? parseObject(
               );
             }
             return ValueIndex(object, index + 1);
-          } else if (token.type == TokenType.COMMA) {
-            state = _ObjectState.COMMA;
+          } else if (token.type == TokenType.comma) {
+            state = _ObjectState.comma;
             index++;
           } else {
             final msg = unexpectedToken(
@@ -146,13 +160,13 @@ ValueIndex<ObjectNode>? parseObject(
           break;
         }
 
-      case _ObjectState.COMMA:
+      case _ObjectState.comma:
         {
           final property = parseProperty(input, tokenList, index, settings);
           if (property != null) {
             index = property.index;
             object.children.add(property.value);
-            state = _ObjectState.PROPERTY;
+            state = _ObjectState.property;
           } else {
             final msg = unexpectedToken(
                 substring(
@@ -172,18 +186,18 @@ ValueIndex<ObjectNode>? parseObject(
 
 ValueIndex<PropertyNode>? parseProperty(
     String input, List<Token> tokenList, int index, Settings settings) {
-  // property: STRING COLON value
+  // property: string colon value
   late Token startToken;
   var property = PropertyNode();
-  var state = _PropertyState._START_;
+  var state = _PropertyState.start;
 
   while (index < tokenList.length) {
     final token = tokenList[index];
 
     switch (state) {
-      case _PropertyState._START_:
+      case _PropertyState.start:
         {
-          if (token.type == TokenType.STRING) {
+          if (token.type == TokenType.string) {
             final value = parseString(safeSubstring(input,
                 token.loc!.start.offset! + 1, token.loc!.end.offset! - 1));
             var key = ValueNode(value, token.value);
@@ -192,7 +206,7 @@ ValueIndex<PropertyNode>? parseProperty(
             }
             startToken = token;
             property = property.copyWith(key: key);
-            state = _PropertyState.KEY;
+            state = _PropertyState.key;
             index++;
           } else {
             return null;
@@ -200,10 +214,10 @@ ValueIndex<PropertyNode>? parseProperty(
           break;
         }
 
-      case _PropertyState.KEY:
+      case _PropertyState.key:
         {
-          if (token.type == TokenType.COLON) {
-            state = _PropertyState.COLON;
+          if (token.type == TokenType.colon) {
+            state = _PropertyState.colon;
             index++;
           } else {
             final msg = unexpectedToken(
@@ -218,7 +232,7 @@ ValueIndex<PropertyNode>? parseProperty(
           break;
         }
 
-      case _PropertyState.COLON:
+      case _PropertyState.colon:
         {
           final value = _parseValue<Node?>(input, tokenList, index, settings);
           property = property.copyWith(value: value.value);
@@ -242,19 +256,19 @@ ValueIndex<PropertyNode>? parseProperty(
 
 ValueIndex<ArrayNode>? parseArray(
     String input, List<Token> tokenList, int index, Settings settings) {
-  // array: LEFT_BRACKET (value (COMMA value)*)? RIGHT_BRACKET
+  // array: leftBracket (value (comma value)*)? rightBracket
   late Token startToken;
   var array = ArrayNode();
-  var state = _ArrayState._START_;
+  var state = _ArrayState.start;
   Token token;
   while (index < tokenList.length) {
     token = tokenList[index];
     switch (state) {
-      case _ArrayState._START_:
+      case _ArrayState.start:
         {
-          if (token.type == TokenType.LEFT_BRACKET) {
+          if (token.type == TokenType.leftBracket) {
             startToken = token;
-            state = _ArrayState.OPEN_ARRAY;
+            state = _ArrayState.openArray;
             index++;
           } else {
             return null;
@@ -262,9 +276,9 @@ ValueIndex<ArrayNode>? parseArray(
           break;
         }
 
-      case _ArrayState.OPEN_ARRAY:
+      case _ArrayState.openArray:
         {
-          if (token.type == TokenType.RIGHT_BRACKET) {
+          if (token.type == TokenType.rightBracket) {
             if (settings.loc) {
               array = array.copyWith(
                   loc: Location.create(
@@ -281,14 +295,14 @@ ValueIndex<ArrayNode>? parseArray(
             final value = _parseValue<Node>(input, tokenList, index, settings);
             index = value.index;
             array.children.add(value.value);
-            state = _ArrayState.VALUE;
+            state = _ArrayState.value;
           }
           break;
         }
 
-      case _ArrayState.VALUE:
+      case _ArrayState.value:
         {
-          if (token.type == TokenType.RIGHT_BRACKET) {
+          if (token.type == TokenType.rightBracket) {
             if (settings.loc) {
               array = array.copyWith(
                   loc: Location.create(
@@ -301,8 +315,8 @@ ValueIndex<ArrayNode>? parseArray(
                       settings.source));
             }
             return ValueIndex(array, index + 1);
-          } else if (token.type == TokenType.COMMA) {
-            state = _ArrayState.COMMA;
+          } else if (token.type == TokenType.comma) {
+            state = _ArrayState.comma;
             index++;
           } else {
             final msg = unexpectedToken(
@@ -317,12 +331,12 @@ ValueIndex<ArrayNode>? parseArray(
           break;
         }
 
-      case _ArrayState.COMMA:
+      case _ArrayState.comma:
         {
           final value = _parseValue<Node>(input, tokenList, index, settings);
           index = value.index;
           array.children.add(value.value);
-          state = _ArrayState.VALUE;
+          state = _ArrayState.value;
           break;
         }
     }
@@ -332,34 +346,34 @@ ValueIndex<ArrayNode>? parseArray(
 
 ValueIndex<LiteralNode>? parseLiteral(
     String input, List<Token> tokenList, int index, Settings settings) {
-  // literal: STRING | NUMBER | TRUE | FALSE | NULL
+  // literal: string | number | true_ | false_ | null_
   final token = tokenList[index];
   dynamic value;
 
   switch (token.type) {
-    case TokenType.STRING:
+    case TokenType.string:
       {
         value = parseString(safeSubstring(
             input, token.loc!.start.offset! + 1, token.loc!.end.offset! - 1));
         break;
       }
-    case TokenType.NUMBER:
+    case TokenType.number:
       {
         value = int.tryParse(token.value!);
         value ??= double.tryParse(token.value!);
         break;
       }
-    case TokenType.TRUE:
+    case TokenType.true_:
       {
         value = true;
         break;
       }
-    case TokenType.FALSE:
+    case TokenType.false_:
       {
         value = false;
         break;
       }
-    case TokenType.NULL:
+    case TokenType.null_:
       {
         value = null;
         break;

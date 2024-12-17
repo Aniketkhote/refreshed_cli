@@ -1,4 +1,4 @@
-import '../interface/sample_interface.dart';
+import 'package:refreshed_cli/samples/interface/sample_interface.dart';
 
 class GenerateLocalesSample extends Sample {
   final String _translationsKeys;

@@ -2,15 +2,14 @@ import 'dart:io';
 
 import 'package:http/http.dart';
 import 'package:recase/recase.dart';
-
-import '../../../../core/internationalization.dart';
-import '../../../../core/locales.g.dart';
-import '../../../../exception_handler/exceptions/cli_exception.dart';
-import '../../../../functions/create/create_single_file.dart';
-import '../../../../functions/is_url/is_url.dart';
-import '../../../../functions/replace_vars/replace_vars.dart';
-import '../../../../samples/impl/get_view.dart';
-import '../../../interface/command.dart';
+import 'package:refreshed_cli/commands/interface/command.dart';
+import 'package:refreshed_cli/core/internationalization.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
+import 'package:refreshed_cli/exception_handler/exceptions/cli_exception.dart';
+import 'package:refreshed_cli/functions/create/create_single_file.dart';
+import 'package:refreshed_cli/functions/is_url/is_url.dart';
+import 'package:refreshed_cli/functions/replace_vars/replace_vars.dart';
+import 'package:refreshed_cli/samples/impl/get_view.dart';
 
 class CreateViewCommand extends Command {
   @override

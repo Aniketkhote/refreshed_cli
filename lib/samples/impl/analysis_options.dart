@@ -1,4 +1,4 @@
-import '../interface/sample_interface.dart';
+import 'package:refreshed_cli/samples/interface/sample_interface.dart';
 
 /// [Sample] file from analysis_options.yaml file creation.
 class AnalysisOptionsSample extends Sample {

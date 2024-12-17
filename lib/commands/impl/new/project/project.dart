@@ -2,17 +2,16 @@ import 'dart:io';
 
 import 'package:dcli/dcli.dart';
 import 'package:path/path.dart' as p;
+import 'package:refreshed_cli/commands/impl/init/flutter/init.dart';
+import 'package:refreshed_cli/commands/interface/command.dart';
+import 'package:refreshed_cli/common/menu/menu.dart';
+import 'package:refreshed_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:refreshed_cli/common/utils/shell/shel.utils.dart';
+import 'package:refreshed_cli/core/internationalization.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
+import 'package:refreshed_cli/core/structure.dart';
 import 'package:refreshed_cli/functions/version/print_get_cli.dart';
-
-import '../../../../common/menu/menu.dart';
-import '../../../../common/utils/pubspec/pubspec_utils.dart';
-import '../../../../common/utils/shell/shel.utils.dart';
-import '../../../../core/internationalization.dart';
-import '../../../../core/locales.g.dart';
-import '../../../../core/structure.dart';
-import '../../../../samples/impl/analysis_options.dart';
-import '../../../interface/command.dart';
-import '../../init/flutter/init.dart';
+import 'package:refreshed_cli/samples/impl/analysis_options.dart';
 
 class CreateProjectCommand extends Command {
   @override
@@ -32,7 +31,7 @@ class CreateProjectCommand extends Command {
   }
 
   Future<ProjectDetails> gatherProjectDetails() async {
-    final name = await getValidProjectName();
+    final name = await getProjectName();
     final org = await getCompanyDomain();
     final iosLang = await getIosLanguage();
     final androidLang = await getAndroidLanguage();
@@ -41,14 +40,14 @@ class CreateProjectCommand extends Command {
     return ProjectDetails(name, org, iosLang, androidLang, useLinter);
   }
 
-  Future<String> getValidProjectName() async {
+  Future<String> getProjectName() async {
     if (args.isNotEmpty && isValidName(args.first.toLowerCase())) {
       return args.first.toLowerCase();
     }
-    return await askForValidName();
+    return await promptForValidName();
   }
 
-  Future<String> askForValidName() async {
+  Future<String> promptForValidName() async {
     String? name;
     do {
       name = ask(Translation(LocaleKeys.ask_name_to_project).tr);
@@ -72,17 +71,25 @@ class CreateProjectCommand extends Command {
   }
 
   Future<String> getIosLanguage() async {
-    final iosLangMenu = Menu(['Swift', 'Objective-C'],
-        title: Translation(LocaleKeys.ask_ios_lang).tr);
-    final iosResult = iosLangMenu.choose();
-    return iosResult.index == 0 ? 'swift' : 'objc';
+    return _chooseLanguage(
+      ['Swift', 'Objective-C'],
+      Translation(LocaleKeys.ask_ios_lang).tr,
+    );
   }
 
   Future<String> getAndroidLanguage() async {
-    final androidLangMenu = Menu(['Kotlin', 'Java'],
-        title: Translation(LocaleKeys.ask_android_lang).tr);
-    final androidResult = androidLangMenu.choose();
-    return androidResult.index == 0 ? 'kotlin' : 'java';
+    return _chooseLanguage(
+      ['Kotlin', 'Java'],
+      Translation(LocaleKeys.ask_android_lang).tr,
+    );
+  }
+
+  Future<String> _chooseLanguage(List<String> languages, String title) async {
+    final languageMenu = Menu(languages, title: title);
+    final result = languageMenu.choose();
+    return result.index == 0
+        ? languages[0].toLowerCase()
+        : languages[1].toLowerCase();
   }
 
   Future<bool> askUseLinter() async {
@@ -93,31 +100,46 @@ class CreateProjectCommand extends Command {
   }
 
   Future<void> createProjectStructure(ProjectDetails details) async {
-    final path = Structure.replaceAsExpected(
-      path: p.join(Directory.current.path, details.name),
-    );
-    await Directory(path).create(recursive: true);
-    Directory.current = path;
+    final projectPath = p.join(Directory.current.path, details.name);
+    final path = Structure.replaceAsExpected(path: projectPath);
 
-    await ShellUtils.flutterCreate(
-        path, details.org, details.iosLang, details.androidLang);
-    await File('test/widget_test.dart').writeAsString('');
+    try {
+      await Directory(path).create(recursive: true);
+      Directory.current = path;
+
+      await ShellUtils.flutterCreate(
+          path, details.org, details.iosLang, details.androidLang);
+      await File('test/widget_test.dart').writeAsString('');
+    } catch (e) {
+      print("Error creating project structure: $e");
+      rethrow;
+    }
   }
 
   Future<void> configureDevelopmentEnvironment(ProjectDetails details) async {
-    if (details.useLinter) {
-      await PubspecUtils.addDependencies('flutter_lints',
-          isDev: true, runPubGet: true);
-      AnalysisOptionsSample(
-              include: 'include: package:flutter_lints/flutter.yaml')
-          .create();
-    } else {
-      AnalysisOptionsSample().create();
+    try {
+      if (details.useLinter) {
+        await PubspecUtils.addDependencies('flutter_lints',
+            isDev: true, runPubGet: true);
+        AnalysisOptionsSample(
+                include: 'include: package:flutter_lints/flutter.yaml')
+            .create();
+      } else {
+        AnalysisOptionsSample().create();
+      }
+    } catch (e) {
+      print("Error configuring development environment: $e");
+      rethrow;
     }
   }
 
   Future<void> initializeProject() async {
-    await InitCommand().execute();
+    try {
+      await InitCommand().execute();
+    } catch (e) {
+      print("Error initializing project: $e");
+      rethrow;
+    }
   }
 
   @override

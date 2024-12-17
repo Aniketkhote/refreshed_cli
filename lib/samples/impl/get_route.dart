@@ -1,4 +1,4 @@
-import '../interface/sample_interface.dart';
+import 'package:refreshed_cli/samples/interface/sample_interface.dart';
 
 /// [Sample] file from [app_routes] file creation.
 class RouteSample extends Sample {

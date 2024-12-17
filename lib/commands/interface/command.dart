@@ -1,9 +1,9 @@
-import '../../common/utils/logger/log_utils.dart';
-import '../../core/generator.dart';
-import '../../core/locales.g.dart';
-import '../../exception_handler/exceptions/cli_exception.dart';
-import '../../extensions.dart';
-import '../impl/args_mixin.dart';
+import 'package:refreshed_cli/commands/impl/args_mixin.dart';
+import 'package:refreshed_cli/common/utils/logger/log_utils.dart';
+import 'package:refreshed_cli/core/generator.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
+import 'package:refreshed_cli/exception_handler/exceptions/cli_exception.dart';
+import 'package:refreshed_cli/extensions.dart';
 
 abstract class Command with ArgsMixin {
   Command() {
@@ -17,8 +17,6 @@ abstract class Command with ArgsMixin {
     }
   }
   int get maxParameters;
-
-  //int get minParameters;
 
   String? get codeSample;
   String get commandName;

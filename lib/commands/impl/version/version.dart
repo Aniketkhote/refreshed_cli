@@ -1,12 +1,9 @@
-import '../../../common/utils/pubspec/pubspec_lock.dart';
-import '../../../core/internationalization.dart';
-import '../../../core/locales.g.dart';
-import '../../../functions/version/print_get_cli.dart';
-import '../../interface/command.dart';
+import 'package:refreshed_cli/commands/interface/command.dart';
+import 'package:refreshed_cli/common/utils/pubspec/pubspec_lock.dart';
+import 'package:refreshed_cli/core/internationalization.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
+import 'package:refreshed_cli/functions/version/print_get_cli.dart';
 
-// ignore_for_file: avoid_print
-
-/// Command to display the current version of the CLI tool.
 class VersionCommand extends Command {
   @override
   String get commandName => 'version';

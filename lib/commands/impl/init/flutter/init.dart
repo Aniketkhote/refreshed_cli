@@ -1,11 +1,11 @@
-import '../../../../common/menu/menu.dart';
-import '../../../../common/utils/logger/log_utils.dart';
-import '../../../../common/utils/shell/shel.utils.dart';
-import '../../../../core/internationalization.dart';
-import '../../../../core/locales.g.dart';
-import '../../../interface/command.dart';
-import 'init_getx_pattern.dart';
-import 'init_katteko.dart';
+import 'package:refreshed_cli/commands/impl/init/flutter/init_getx_pattern.dart';
+import 'package:refreshed_cli/commands/impl/init/flutter/init_katteko.dart';
+import 'package:refreshed_cli/commands/interface/command.dart';
+import 'package:refreshed_cli/common/menu/menu.dart';
+import 'package:refreshed_cli/common/utils/logger/log_utils.dart';
+import 'package:refreshed_cli/common/utils/shell/shel.utils.dart';
+import 'package:refreshed_cli/core/internationalization.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
 
 class InitCommand extends Command {
   @override

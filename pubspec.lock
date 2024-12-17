@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-      sha256: c0555ee1c067778474ba494b969f833de1d9123802d9d11d055c2991dfaab5c2
+      sha256: "88399e291da5f7e889359681a8f64b18c5123e03576b01f32a6a276611e511c3"
       url: "https://pub.dev"
     source: hosted
-    version: "77.0.0"
+    version: "78.0.0"
   _macros:
     dependency: transitive
     description: dart
@@ -18,10 +18,10 @@ packages:
     dependency: transitive
     description:
       name: analyzer
-      sha256: e58ba14f0baf226303f3503c7f30533fdbc03e264b096f37f9d1c5a9fe757513
+      sha256: "62899ef43d0b962b056ed2ebac6b47ec76ffd003d5f7c4e4dc870afe63188e33"
       url: "https://pub.dev"
     source: hosted
-    version: "7.0.0"
+    version: "7.1.0"
   ansicolor:
     dependency: "direct main"
     description:
@@ -70,6 +70,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
+  checked_yaml:
+    dependency: transitive
+    description:
+      name: checked_yaml
+      sha256: feb6bed21949061731a7a75fc5d2aa727cf160b91af9a3e464c5e3a32e28b5ff
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
   chunked_stream:
     dependency: transitive
     description:
@@ -310,6 +318,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      sha256: "1ce844379ca14835a50d2f019a3099f419082cfdd231cd86a142af94dd5c6bb1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.9.0"
   lints:
     dependency: "direct dev"
     description:
@@ -423,21 +439,13 @@ packages:
     source: hosted
     version: "1.2.2+1"
   pub_semver:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: pub_semver
       sha256: "7b3cfbf654f3edd0c6298ecd5be782ce997ddf0e00531b9464b55245185bbbbd"
       url: "https://pub.dev"
     source: hosted
     version: "2.1.5"
-  pubspec:
-    dependency: "direct main"
-    description:
-      name: pubspec
-      sha256: f534a50a2b4d48dc3bc0ec147c8bd7c304280fff23b153f3f11803c4d49d927e
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.0"
   pubspec_lock:
     dependency: transitive
     description:
@@ -454,14 +462,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
-  quiver:
-    dependency: transitive
+  pubspec_parse:
+    dependency: "direct main"
     description:
-      name: quiver
-      sha256: ea0b925899e64ecdfbf9c7becb60d5b50e706ade44a85b2363be2a22d88117d2
+      name: pubspec_parse
+      sha256: c799b721d79eb6ee6fa56f00c04b472dcd44a30d258fac2174a6ec57302678f8
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.2"
+    version: "1.3.0"
   recase:
     dependency: "direct main"
     description:
@@ -654,14 +662,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.1"
-  uri:
-    dependency: transitive
-    description:
-      name: uri
-      sha256: "889eea21e953187c6099802b7b4cf5219ba8f3518f604a1033064d45b1b8268a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   uuid:
     dependency: transitive
     description:
@@ -751,4 +751,4 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.6.0-0 <4.0.0"
+  dart: ">=3.6.0 <4.0.0"

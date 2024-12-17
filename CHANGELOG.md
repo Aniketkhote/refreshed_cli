@@ -1,3 +1,7 @@
+# 1.2.0
+
+- Refactor code.
+
 # 1.1.2
 
 - Compatible with flutter `3.27.0`.

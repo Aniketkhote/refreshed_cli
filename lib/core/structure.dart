@@ -2,16 +2,15 @@ import 'dart:io';
 
 import 'package:path/path.dart' as p;
 import 'package:recase/recase.dart';
-
-import '../exception_handler/exceptions/cli_exception.dart';
-import '../models/file_model.dart';
-import 'internationalization.dart';
-import 'locales.g.dart';
+import 'package:refreshed_cli/core/internationalization.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
+import 'package:refreshed_cli/exception_handler/exceptions/cli_exception.dart';
+import 'package:refreshed_cli/models/file_model.dart';
 
 class Structure {
   static final Map<String, String> _paths = {
-    'page': Directory(replaceAsExpected(
-                path: '${Directory.current.path} /lib/pages/'))
+    'page': Directory(
+                replaceAsExpected(path: '${Directory.current.path}/lib/pages/'))
             .existsSync()
         ? replaceAsExpected(path: 'lib/pages')
         : replaceAsExpected(path: 'lib/app/modules'),

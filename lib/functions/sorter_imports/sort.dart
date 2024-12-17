@@ -1,12 +1,15 @@
 import 'dart:convert';
 
-import '../../common/utils/pubspec/pubspec_utils.dart';
-import '../../extensions.dart';
-import '../create/create_single_file.dart';
-import '../formatter_dart_file/frommatter_dart_file.dart';
-import '../path/replace_to_relative.dart';
+import 'package:refreshed_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:refreshed_cli/extensions.dart';
+import 'package:refreshed_cli/functions/create/create_single_file.dart';
+import 'package:refreshed_cli/functions/formatter_dart_file/frommatter_dart_file.dart';
+import 'package:refreshed_cli/functions/path/replace_to_relative.dart';
 
-/// Sort imports from a dart file
+const dartImportPrefix = 'dart:';
+const flutterImportPrefix = 'package:flutter/';
+const projectImportPrefix = 'package:';
+
 String sortImports(
   String content, {
   String? packageName,
@@ -20,31 +23,29 @@ String sortImports(
 
   var contentLines = <String>[];
 
-  var librarys = <String>[];
   var dartImports = <String>[];
   var flutterImports = <String>[];
   var packageImports = <String>[];
-  var projectRelativeImports = <String>[];
   var projectImports = <String>[];
+  var projectRelativeImports = <String>[];
   var exports = <String>[];
+  var librarys = <String>[];
 
   var stringLine = false;
   for (var i = 0; i < lines.length; i++) {
     if (lines[i].startsWith('import ') &&
         !stringLine &&
         lines[i].endsWith(';')) {
-      if (lines[i].contains('dart:')) {
+      if (lines[i].startsWith(dartImportPrefix)) {
         dartImports.add(lines[i]);
-      } else if (lines[i].contains('package:flutter/')) {
+      } else if (lines[i].startsWith(flutterImportPrefix)) {
         flutterImports.add(lines[i]);
-      } else if (lines[i].contains('package:$packageName/')) {
+      } else if (lines[i].startsWith('package:$packageName/')) {
         projectImports.add(lines[i]);
       } else if (!lines[i].contains('package:')) {
         projectRelativeImports.add(lines[i]);
-      } else if (lines[i].contains('package:')) {
-        if (!lines[i].contains('package:flutter/')) {
-          packageImports.add(lines[i]);
-        }
+      } else {
+        packageImports.add(lines[i]);
       }
     } else if (lines[i].startsWith('export ') &&
         lines[i].endsWith(';') &&
@@ -55,8 +56,7 @@ String sortImports(
         !stringLine) {
       librarys.add(lines[i]);
     } else {
-      var containsThreeQuotes = lines[i].contains("'''");
-      if (containsThreeQuotes) {
+      if (lines[i].contains("'''")) {
         stringLine = !stringLine;
       }
       contentLines.add(lines[i]);
@@ -74,9 +74,9 @@ String sortImports(
 
   if (renameImport) {
     projectImports.replaceAll(_replacePath);
-
     projectRelativeImports.replaceAll(_replacePath);
   }
+
   if (filePath.isNotEmpty && useRelative) {
     projectImports
         .replaceAll((element) => replaceToRelativeImport(element, filePath));
@@ -84,17 +84,16 @@ String sortImports(
     projectImports.clear();
   }
 
-  dartImports.sort();
-  flutterImports.sort();
-  packageImports.sort();
-  projectImports.sort();
-  projectRelativeImports.sort();
-  exports.sort();
-  librarys.sort();
+  // Sort imports
+  _sortImportsList(dartImports);
+  _sortImportsList(flutterImports);
+  _sortImportsList(packageImports);
+  _sortImportsList(projectImports);
+  _sortImportsList(projectRelativeImports);
+  _sortImportsList(exports);
+  _sortImportsList(librarys);
 
-  var sortedLines = <String>[];
-
-  sortedLines.addAll([
+  var sortedLines = <String>[
     ...librarys,
     '',
     ...dartImports,
@@ -110,9 +109,13 @@ String sortImports(
     ...exports,
     '',
     ...contentLines
-  ]);
+  ];
 
   return formatterDartFile(sortedLines.join('\n'));
+}
+
+void _sortImportsList(List<String> imports) {
+  imports.sort();
 }
 
 String _replacePath(String str) {

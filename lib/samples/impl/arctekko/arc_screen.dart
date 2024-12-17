@@ -1,6 +1,5 @@
 import 'package:recase/recase.dart';
-
-import '../../interface/sample_interface.dart';
+import 'package:refreshed_cli/samples/interface/sample_interface.dart';
 
 //Usei arc pra fazer referencia a clean do katekko
 class ArcScreenSample extends Sample {

@@ -1,10 +1,10 @@
-import '../../../common/utils/logger/log_utils.dart';
-import '../../../common/utils/pubspec/pubspec_utils.dart';
-import '../../../common/utils/shell/shel.utils.dart';
-import '../../../core/internationalization.dart';
-import '../../../core/locales.g.dart';
-import '../../../exception_handler/exceptions/cli_exception.dart';
-import '../../interface/command.dart';
+import 'package:refreshed_cli/commands/interface/command.dart';
+import 'package:refreshed_cli/common/utils/logger/log_utils.dart';
+import 'package:refreshed_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:refreshed_cli/common/utils/shell/shel.utils.dart';
+import 'package:refreshed_cli/core/internationalization.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
+import 'package:refreshed_cli/exception_handler/exceptions/cli_exception.dart';
 
 class RemoveCommand extends Command {
   @override

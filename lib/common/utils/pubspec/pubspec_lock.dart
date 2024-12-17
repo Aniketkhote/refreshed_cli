@@ -1,12 +1,11 @@
 import 'dart:io';
 
 import 'package:path/path.dart';
+import 'package:refreshed_cli/common/utils/logger/log_utils.dart';
+import 'package:refreshed_cli/core/internationalization.dart';
+import 'package:refreshed_cli/core/locales.g.dart';
+import 'package:refreshed_cli/functions/version/check_dev_version.dart';
 import 'package:yaml/yaml.dart';
-
-import '../../../core/internationalization.dart';
-import '../../../core/locales.g.dart';
-import '../../../functions/version/check_dev_version.dart';
-import '../logger/log_utils.dart';
 
 class PubspecLock {
   static Future<String?> getVersionCli({bool disableLog = false}) async {
